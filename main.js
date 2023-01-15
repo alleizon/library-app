@@ -53,13 +53,15 @@ function createBookCard(book, bookCard) {
     p.classList.add(`book-${property}`);
 
     if (index < 3) {
-      const span = document.createElement("span");
-      span.classList.add("book-property");
+      const spanProp = document.createElement("span");
+      spanProp.classList.add("book-property");
+      const spanValue = document.createElement("span");
+      spanValue.textContent = book[property];
       const spanText = property.charAt(0).toUpperCase() + property.slice(1);
 
-      span.textContent = `${spanText}: `;
-      p.appendChild(span);
-      p.innerHTML += `${book[property]}`;
+      spanProp.textContent = `${spanText}: `;
+      p.appendChild(spanProp);
+      p.appendChild(spanValue);
       bookInfo.appendChild(p);
     } else {
       p.textContent = `${property}: ${book[property]}`;

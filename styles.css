@@ -52,3 +52,22 @@ main.container {
     flex-direction: column;
     justify-content: space-around;
 }
+
+.book-info {
+    display:flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.book-read {
+    text-align: center;
+}
+
+.book-name {
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.book-property {
+    font-weight: 300;
+}

@@ -100,7 +100,7 @@ header h1 {
 
 #book-form {
     position:absolute;
-    visibility: visible;
+    visibility: hidden;
     padding: 0.5rem 1rem;
     display:grid;
     background-color: var(--card-bg-color);

@@ -1,45 +1,10 @@
 /* eslint-disable no-use-before-define */
-const myLibrary = [
-  {
-    name: "Game of Thrones",
-    author: "George R. R. Martin",
-    pages: 300,
-    read: true,
-  },
+const container = document.querySelector(".container");
 
-  {
-    name: "Game of Thrones",
-    author: "George R. R. Martin",
-    pages: 300,
-    read: true,
-  },
-
-  {
-    name: "Game of Thrones",
-    author: "George R. R. Martin",
-    pages: 300,
-    read: true,
-  },
-];
-
-addLibraryToContainer();
-
-function Book() {
-  // the constructor...
-}
-
-function addBookToLibrary() {
-  // do stuff here
-}
-
-function addLibraryToContainer() {
-  const container = document.querySelector(".container");
-
-  myLibrary.forEach((book) => {
-    const bookCard = document.createElement("div");
-    bookCard.classList.add("book-card");
-    container.appendChild(createBookCard(book, bookCard));
-  });
+function addBookToContainer(book) {
+  const bookCard = document.createElement("div");
+  bookCard.classList.add("book-card");
+  container.appendChild(createBookCard(book, bookCard));
 }
 
 function createBookCard(book, bookCard) {
@@ -69,4 +34,39 @@ function createBookCard(book, bookCard) {
     }
   });
   return bookCard;
+}
+
+function addBookToLibrary() {
+  const name = document.getElementById("form-name").value;
+  const author = document.getElementById("form-author").value;
+  const pages = document.getElementById("form-pages").value;
+  const read = document.getElementById("form-read").checked;
+  const book = new Book(name, author, parseInt(pages, 10), read);
+  myLibrary.push(book);
+
+  return book;
+}
+
+let formHidden = true;
+
+const myLibrary = [];
+
+const addBtn = document.getElementById("add-book");
+addBtn.addEventListener("click", () => {
+  const form = document.querySelector("#book-form");
+  form.style.visibility = formHidden ? "visible" : "hidden";
+  formHidden = !formHidden;
+});
+
+const formAddBtn = document.getElementById("form-add");
+formAddBtn.addEventListener("click", () => {
+  const book = addBookToLibrary();
+  addBookToContainer(book);
+});
+
+function Book(book, author, pages, read) {
+  this.name = book;
+  this.author = author;
+  this.pages = pages;
+  this.read = read;
 }

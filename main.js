@@ -76,21 +76,25 @@ let formHidden = true;
 
 const myLibrary = [];
 
-const addBtn = document.getElementById("add-book");
-addBtn.addEventListener("click", () => {
+const formToggle = document.getElementById("add-book");
+formToggle.addEventListener("click", () => {
   const form = document.querySelector("#book-form");
   form.style.visibility = formHidden ? "visible" : "hidden";
   formHidden = !formHidden;
 });
 
-const formAddBtn = document.getElementById("form-add");
-formAddBtn.addEventListener("click", () => {
+const addBtn = document.getElementById("form-add");
+addBtn.addEventListener("click", () => {
   const book = addBookToLibrary();
   addBookToContainer(book);
 });
 
 function removeBook(e) {
   const divIndex = e.target.parentElement.attributes["data-index"].value;
+  for (let i = +divIndex + 1; i < myLibrary.length; i += 1) {
+    const nextDiv = document.querySelector(`[data-index="${i}"]`);
+    nextDiv.dataset.index = i - 1;
+  }
   myLibrary.splice(divIndex, 1);
   e.target.parentElement.remove();
 }

@@ -21,7 +21,7 @@ body {
     appearance: none;
     background-color: var(--body-bg-color);
     display: grid;
-    grid-template: 1fr 5fr 1fr / 1fr;
+    grid-template: auto 5fr auto / 1fr;
     gap: 2rem;
     position: relative;
 }
@@ -42,7 +42,7 @@ ul {
 main.container {
     position: relative;
     display:grid;
-    grid-template-columns: repeat(auto-fit, minmax(225px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(225px, 300px));
     grid-auto-rows: 300px;
     gap: 20px;
     padding: 1rem 2rem;
@@ -134,25 +134,40 @@ header h1 {
 }
 
 #book-form {
-    position:absolute;
+    font-size: 1.3rem;
+    position:fixed;
     visibility: hidden;
-    padding: 0.5rem 1rem;
+    padding: 1rem;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -60%);
+    transform: translate(-50%, -75%);
     display:grid;
     background-color: var(--card-bg-color);
     box-shadow: 1px 1px 5px black;
-    border-radius: 20px;
+    border-radius: 5px;
     z-index: 50;
 }
 
-input {
+#book-form input {
+    height: 30px;
     margin-bottom: 15px;
     outline: none;
     border: 1px solid black;
     border-radius: 10px;
     padding: 0 5px;
+    font-size: 1rem;
+}
+
+#book-form button {
+    width: 75px;
+    height: 40px;
+    font-weight: 600;
+    font-size: 1.3rem;
+    border-radius: 10px;
+    background-color: var(--body-bg-color);
+    border: 1px solid transparent;
+    color: var(--card-bg-color);
+    margin: auto;
 }
 
 label {
@@ -174,4 +189,13 @@ label {
     border: 1px solid rgba(0, 0, 0, 0.623);
     border-radius: 50%;
     transition: border 0.2s;
+}
+
+.bg-darkness {
+    display: none;
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    background-color: rgba(0, 0, 0, 0.45);
+    z-index: 49;
 }

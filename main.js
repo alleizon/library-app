@@ -81,20 +81,40 @@ function removeBook(e) {
   e.target.parentElement.remove();
 }
 
+function clearForm() {
+  document.getElementById("form-name").value = null;
+  document.getElementById("form-author").value = null;
+  document.getElementById("form-pages").value = null;
+  document.getElementById("form-read").checked = false;
+}
+
+function toggleForm() {
+  const form = document.querySelector("#book-form");
+  form.style.visibility = formHidden ? "visible" : "hidden";
+  darkness.style.display = "block";
+  formHidden = !formHidden;
+}
+
 const container = document.querySelector(".container");
+const darkness = document.querySelector(".bg-darkness");
+
+darkness.addEventListener("click", () => {
+  toggleForm();
+  darkness.style.display = "none";
+});
+
 let formHidden = true;
 
 const myLibrary = [];
 
 const formToggle = document.getElementById("add-book");
-formToggle.addEventListener("click", () => {
-  const form = document.querySelector("#book-form");
-  form.style.visibility = formHidden ? "visible" : "hidden";
-  formHidden = !formHidden;
-});
+formToggle.addEventListener("click", toggleForm);
 
 const addBtn = document.getElementById("form-add");
 addBtn.addEventListener("click", () => {
   const book = addBookToLibrary();
   addBookToContainer(book);
+  toggleForm();
+  darkness.style.display = "none";
+  clearForm();
 });

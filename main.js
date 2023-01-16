@@ -19,23 +19,27 @@ function createBookCard(book, bookCard) {
   bookCard.appendChild(bookInfo);
 
   bookKeys.forEach((property, index) => {
-    const p = document.createElement("p");
-    p.classList.add(`book-${property}`);
-
     if (index < 3) {
+      const p = document.createElement("p");
+      p.classList.add(`book-${property}`);
       const spanProp = document.createElement("span");
       spanProp.classList.add("book-property");
       const spanValue = document.createElement("span");
       spanValue.textContent = book[property];
       const spanText = property.charAt(0).toUpperCase() + property.slice(1);
-
       spanProp.textContent = `${spanText}: `;
       p.appendChild(spanProp);
       p.appendChild(spanValue);
       bookInfo.appendChild(p);
     } else {
-      p.textContent = `${property}: ${book[property]}`;
-      bookCard.appendChild(p);
+      const btn = document.createElement("button");
+      btn.setAttribute("type", "button");
+      btn.classList.add(`book-${property}`);
+      const read = book[property] ? "read" : "not-read";
+      if (!book[property]) btn.classList.add("not-read");
+      btn.textContent = read;
+      btn.addEventListener("click", toggleBookRead);
+      bookCard.appendChild(btn);
     }
   });
   return bookCard;
@@ -52,8 +56,16 @@ function addBookToLibrary() {
   return book;
 }
 
-function Book(book, author, pages, read) {
-  this.name = book;
+function toggleBookRead(e) {
+  const bookIndex = e.target.parentElement.attributes["data-index"].value;
+  myLibrary[bookIndex].read = !myLibrary[bookIndex].read;
+  const { read } = myLibrary[bookIndex];
+  e.target.classList.toggle("not-read");
+  e.target.textContent = read ? "read" : "not-read";
+}
+
+function Book(name, author, pages, read) {
+  this.name = name;
   this.author = author;
   this.pages = pages;
   this.read = read;

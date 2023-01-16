@@ -1,9 +1,14 @@
 /* eslint-disable no-use-before-define */
-const container = document.querySelector(".container");
 
 function addBookToContainer(book) {
   const bookCard = document.createElement("div");
   bookCard.classList.add("book-card");
+  bookCard.dataset.index = myLibrary.length - 1;
+  const closeIcon = document.createElement("p");
+  closeIcon.classList.add("close-icon");
+  closeIcon.innerHTML = "&#x2715";
+  closeIcon.addEventListener("click", removeBook);
+  bookCard.appendChild(closeIcon);
   container.appendChild(createBookCard(book, bookCard));
 }
 
@@ -47,6 +52,14 @@ function addBookToLibrary() {
   return book;
 }
 
+function Book(book, author, pages, read) {
+  this.name = book;
+  this.author = author;
+  this.pages = pages;
+  this.read = read;
+}
+
+const container = document.querySelector(".container");
 let formHidden = true;
 
 const myLibrary = [];
@@ -64,9 +77,8 @@ formAddBtn.addEventListener("click", () => {
   addBookToContainer(book);
 });
 
-function Book(book, author, pages, read) {
-  this.name = book;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
+function removeBook(e) {
+  const divIndex = e.target.parentElement.attributes["data-index"].value;
+  myLibrary.splice(divIndex, 1);
+  e.target.parentElement.remove();
 }

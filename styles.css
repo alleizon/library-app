@@ -25,7 +25,7 @@ body {
     display: grid;
     grid-template-rows: 1fr 5fr 1fr;
     align-items: center;
-    justify-content: center;
+    justify-items: center;
     gap: 2rem;
 }
 
@@ -60,6 +60,7 @@ main.container {
     flex-direction: column;
     justify-content: space-around;
     color: black;
+    position: relative;
 }
 
 .book-info {
@@ -107,6 +108,7 @@ header h1 {
     box-shadow: 1px 1px 5px black;
     border-radius: 20px;
     color:black;
+    z-index: 50;
 }
 
 input {
@@ -119,4 +121,21 @@ input {
 
 label {
     margin-bottom: 5px;
+}
+
+.close-icon {
+    position: absolute;
+    border: 1px solid transparent;
+    top: 1rem;
+    right: 1rem;
+    cursor: pointer;
+    text-align: center;
+    width: 20px;
+    height: 20px;
+}
+
+.close-icon:hover {
+    border: 1px solid rgba(0, 0, 0, 0.623);
+    border-radius: 50%;
+    transition: border 0.2s;
 }

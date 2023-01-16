@@ -91,6 +91,7 @@ function clearForm() {
 function toggleForm() {
   const form = document.querySelector("#book-form");
   form.style.visibility = formHidden ? "visible" : "hidden";
+  form.classList.toggle("form-toggle");
   darkness.style.display = "block";
   formHidden = !formHidden;
 }

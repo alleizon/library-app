@@ -1,0 +1,18 @@
+.name-error,
+.author-error,
+.pages-error {
+    padding: 3px 5px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    color: rgb(204, 69, 69);
+    font-size: 70%;
+    font-weight: 600;
+}
+
+input:focus:invalid {
+    border: 1px solid red !important;
+}
+
+input[type="checkbox"]#form-read {
+    margin-bottom: 15px;
+}

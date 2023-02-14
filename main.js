@@ -1,5 +1,23 @@
 /* eslint-disable no-use-before-define */
 
+const Form = (() => {
+  const name = document.getElementById("form-name");
+  const author = document.getElementById("form-author");
+  const pages = document.getElementById("form-pages");
+  const read = document.getElementById("form-read");
+
+  const getName = () => name.validity.valid;
+  const getAuthor = () => author.validity.valid;
+  const getPages = () => pages.validity.valid;
+  const getRead = () => read.checked;
+
+  return { getName, getAuthor, getPages, getRead };
+})();
+
+function isValid() {
+  return Form.getName() && Form.getAuthor() && Form.getPages();
+}
+
 function addBookToContainer(book) {
   const bookCard = document.createElement("div");
   bookCard.classList.add("book-card");
@@ -50,6 +68,7 @@ function addBookToLibrary() {
   const author = document.getElementById("form-author").value;
   const pages = document.getElementById("form-pages").value;
   const read = document.getElementById("form-read").checked;
+
   const book = new Book(name, author, parseInt(pages, 10), read);
   myLibrary.push(book);
 
@@ -113,11 +132,42 @@ const myLibrary = [];
 const formToggle = document.getElementById("add-book");
 formToggle.addEventListener("click", toggleForm);
 
-const addBtn = document.getElementById("form-add");
-addBtn.addEventListener("click", () => {
+const form = document.getElementById("book-form");
+form.addEventListener("submit", (event) => {
+  event.preventDefault();
+
+  if (!isValid()) return;
+
   const book = addBookToLibrary();
   addBookToContainer(book);
   toggleForm();
   darkness.style.display = "none";
   clearForm();
 });
+
+(() => {
+  const name = document.getElementById("form-name");
+  const author = document.getElementById("form-author");
+  const pages = document.getElementById("form-pages");
+
+  name.addEventListener("input", () => {
+    const nameError = document.querySelector("span.name-error");
+    if (name.validity.valueMissing) {
+      nameError.textContent = "Book name can't be empty.";
+    } else nameError.textContent = "";
+  });
+
+  author.addEventListener("input", () => {
+    const authorError = document.querySelector("span.author-error");
+    if (author.validity.valueMissing) {
+      authorError.textContent = "Author name can't be empty.";
+    } else authorError.textContent = "";
+  });
+
+  pages.addEventListener("input", () => {
+    const pagesError = document.querySelector("span.pages-error");
+    if (!pages.validity.valid) {
+      pagesError.textContent = "Number of pages can't be empty/0";
+    } else pagesError.textContent = "";
+  });
+})();

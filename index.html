@@ -14,21 +14,24 @@
         <button id="add-book" class="add-book">Add Book</button>
     </header>
     <div class="bg-darkness"></div>
-    <form action="" class="" id="book-form">
+    <form action="" class="" novalidate id="book-form">
 
         <label for="form-name">Book name</label>
-        <input type="text" name="name" id="form-name" autocomplete="off">
+        <input type="text" name="name" id="form-name" required autocomplete="off">
+        <span class="name-error"></span>
 
         <label for="form-author">Author</label>
-        <input type="text" name="author" id="form-author" autocomplete="off">
+        <input type="text" name="author" id="form-author" required autocomplete="off">
+        <span class="author-error"></span>
 
         <label for="form-pages">Number of pages</label>
-        <input type="number" name="pages" id="form-pages" autocomplete="off">
+        <input type="number" name="pages" id="form-pages" required min="1" autocomplete="off">
+        <span class="pages-error"></span>
     
         <label for="form-read">Finished reading?</label>
         <input type="checkbox" name="read" id="form-read" autocomplete="off">
 
-        <button type="button" id="form-add">Add</button>
+        <button id="form-add">Add</button>
     </form>
     <main class="container">
         
